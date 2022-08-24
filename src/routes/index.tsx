@@ -1,14 +1,14 @@
 import { useRoutes, Navigate } from 'react-router-dom';
 
-import { Landing } from '@/features/misc';
+// import { Landing } from '@/features/misc';
 
 import { protectedRoutes } from './protected';
 import { publicRoutes } from './public';
 
 export const AppRoutes = () => {
   const commonRoutes = [
-    { path: '/', element: <Landing /> },
-    { path: '*', element: <Navigate to="/" /> },
+    // { path: '/', element: <Landing /> },
+    { path: '*', element: <Navigate to="/cms" /> },
   ];
 
   const routes = true ? protectedRoutes : publicRoutes;
