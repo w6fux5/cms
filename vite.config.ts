@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import {resolve} from 'path'
+import path, {resolve} from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,6 +9,7 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
+        additionalData: `@import "${path.resolve(__dirname, 'src/less/variable')}";`,
       },
     },
   },

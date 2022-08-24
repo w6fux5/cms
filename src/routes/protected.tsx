@@ -1,24 +1,24 @@
-import { Spin } from 'antd';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import { MainLayout } from '@/components';
 import { lazyImport } from '@/utils/lazyImport';
 
 const { Home } = lazyImport(() => import('@/features/misc'), 'Home');
 
 const App = () => {
   return (
-    <div>
+    <MainLayout>
       <Suspense
         fallback={
-          <div className="">
-            <Spin size="large" />
+          <div style={{ backgroundColor: 'blue' }}>
+            <h1>Loading...</h1>
           </div>
         }
       >
         <Outlet />
       </Suspense>
-    </div>
+    </MainLayout>
   );
 };
 

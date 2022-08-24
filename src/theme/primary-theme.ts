@@ -1,4 +1,5 @@
 export const primaryTheme = {
-  primaryColor: '#ff7a45',
-  input: { autoComplete: 'off' },
+  primaryColor: '#fa8c16',
+  successColor: '#3bbf2a',
+  errorColor: '#bf2a2a',
 };
