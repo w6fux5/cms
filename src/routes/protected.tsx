@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { MainLayout } from '@/components';
+import { MainLayout, Loading } from '@/components';
 import { lazyImport } from '@/utils/lazyImport';
 
 // const { Home } = lazyImport(() => import('@/features/misc'), 'Home');ㄎ
@@ -17,13 +17,7 @@ const { ValidCodeRoutes } = lazyImport(() => import('@/features/valid-code'), 'V
 const App = () => {
   return (
     <MainLayout>
-      <Suspense
-        fallback={
-          <div style={{ backgroundColor: 'blue' }}>
-            <h1>Loading...</h1>
-          </div>
-        }
-      >
+      <Suspense fallback={<Loading />}>
         <Outlet />
       </Suspense>
     </MainLayout>
