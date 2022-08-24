@@ -1,7 +1,8 @@
-import { Cool } from '@/features/cool';
+import { AppProvider } from '@/providers';
+import { AppRoutes } from '@/routes';
 
 export const App = () => (
-  <div>
-    <Cool />
-  </div>
+  <AppProvider>
+    <AppRoutes />
+  </AppProvider>
 );
