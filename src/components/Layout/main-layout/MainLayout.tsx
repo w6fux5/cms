@@ -10,7 +10,6 @@ type MainLayoutProps = {
 };
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
-  console.log('layout');
   return (
     <Layout>
       <MainHeader />

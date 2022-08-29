@@ -1,11 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { Instant } from './Instant';
+import { Rate, InstantOrder, InstantOrderInfo } from '../components';
 
 export const InstantRoutes = () => {
   return (
-    <Routes>
-      <Route path="" element={<Instant />} />
-    </Routes>
+    <>
+      <Rate />
+      <Routes>
+        <Route index element={<InstantOrder />} />
+        <Route path="/:token" element={<InstantOrderInfo />} />
+      </Routes>
+    </>
   );
 };

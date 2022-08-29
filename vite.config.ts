@@ -5,6 +5,15 @@ import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      '/j': {
+        target: 'http://10.172.161.2:6881',
+        // changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/j/, ''),
+      },
+    },
+  },
   plugins: [
     react(),
     vitePluginImp({
@@ -19,8 +28,12 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
+        modifyVars: {
+          'primary-color': '#fa8c16',
+          'success-color': '#3bbf2a',
+          'error-color': '#bf2a2a',
+        },
         javascriptEnabled: true,
-        // additionalData: `@import "${path.resolve(__dirname, 'src/less/variable')}";`,
       },
     },
   },

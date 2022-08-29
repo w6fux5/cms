@@ -6,7 +6,7 @@ export const Loading = () => {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        paddingTop: '15rem',
+        paddingTop: '25rem',
         position: 'absolute',
         top: 0,
         right: 0,
