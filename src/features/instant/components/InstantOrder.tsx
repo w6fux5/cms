@@ -1,5 +1,4 @@
 import { Table } from 'antd';
-import { useNavigate } from 'react-router-dom';
 
 import { useWebsocket } from '@/hooks/useWebSocket';
 
@@ -12,28 +11,18 @@ const url = 'ws_liveorder.ashx';
 export const InstantOrder = () => {
   const { connectionStatus, receivedData } = useWebsocket({ url });
 
-  const navigate = useNavigate();
-
-  console.log(connectionStatus);
-
   return (
     <InstantLayout title="即時訂單">
       <Table
-        style={{ color: 'red' }}
-        rowKey="key"
+        rowKey="token"
+        loading={connectionStatus === 'Connecting'}
         dataSource={receivedData}
         columns={columns}
+        size="small"
         scroll={{ x: 1500 }}
         pagination={{
           showQuickJumper: true,
           defaultPageSize: 10,
-        }}
-        onRow={(record) => {
-          return {
-            onClick: () => {
-              navigate(`/cms/instant/${record.token}`);
-            },
-          };
         }}
       />
     </InstantLayout>

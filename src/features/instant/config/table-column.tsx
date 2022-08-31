@@ -1,4 +1,6 @@
+import { Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { Link } from 'react-router-dom';
 
 interface LiveOrderReceivedData {
   Agent: string;
@@ -13,7 +15,19 @@ interface LiveOrderReceivedData {
   token: string;
 }
 
-const getOrderStat = (Order_StatusID: number) => {
+export const formatP5 = (data: string) => {
+  const name = data.split('|')[0];
+  const account = data.split('|')[1];
+  const bank = data.split('|')[2];
+
+  return {
+    name,
+    account,
+    bank,
+  };
+};
+
+export const getOrderStatus = (Order_StatusID: number) => {
   switch (Order_StatusID) {
     case 1:
       return <span>交易成功</span>;
@@ -29,7 +43,6 @@ const getOrderStat = (Order_StatusID: number) => {
       return <span>交易超時</span>;
     case 99:
       return <span>交易取消</span>;
-
     default:
       return <span>null</span>;
   }
@@ -57,14 +70,18 @@ export const columns: ColumnsType<LiveOrderReceivedData> = [
     key: 'Title',
     filters: [
       {
-        text: <span>London</span>,
-        value: 'London',
+        text: <span>K100U</span>,
+        value: 'K100U',
       },
       {
-        text: <span>New York</span>,
-        value: 'New York',
+        text: <span>DEMO</span>,
+        value: 'DEMO',
       },
     ],
+    onFilter: (value: string | number | boolean, record) => {
+      if (typeof value !== 'string') return false;
+      return record.Title.includes(value);
+    },
   },
   {
     title: '來源',
@@ -100,12 +117,12 @@ export const columns: ColumnsType<LiveOrderReceivedData> = [
   {
     title: '會員手機',
     dataIndex: 'User',
-    key: 'address',
+    key: 'memberPhone',
   },
   {
     title: '代理手機',
     dataIndex: 'Agent',
-    key: 'Agent',
+    key: 'AgentPhone',
   },
   {
     title: 'USDT',
@@ -126,7 +143,7 @@ export const columns: ColumnsType<LiveOrderReceivedData> = [
     title: '狀態',
     dataIndex: 'Order_StatusID',
     key: 'Order_StatusID',
-    render: (Order_StatusID) => getOrderStat(Order_StatusID),
+    render: (Order_StatusID) => getOrderStatus(Order_StatusID),
   },
   {
     title: '訊息',
@@ -137,5 +154,12 @@ export const columns: ColumnsType<LiveOrderReceivedData> = [
     title: '是否測試',
     dataIndex: 'isTest',
     key: 'isTest',
+  },
+  {
+    title: 'Action',
+    width: 100,
+    dataIndex: '',
+    key: 'x',
+    render: (record) => <Link to={`/cms/instant/${record.token}`}>查看</Link>,
   },
 ];

@@ -32,6 +32,7 @@ export default defineConfig({
           'primary-color': '#fa8c16',
           'success-color': '#3bbf2a',
           'error-color': '#bf2a2a',
+          'table-row-hover-bg': '#fffac6'
         },
         javascriptEnabled: true,
       },

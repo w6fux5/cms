@@ -1,17 +1,34 @@
-import { Typography } from 'antd';
+import { RollbackOutlined } from '@ant-design/icons';
+import { Typography, Space, Button } from 'antd';
 import { ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type InstantLayoutProps = {
   children: ReactNode;
-  title: string;
+  title?: string;
   style?: React.CSSProperties;
+  extra?: ReactNode;
+  headerStyle?: React.CSSProperties;
+  returnBtn?: ReactNode;
 };
 
 const defaultProps = {
   style: {},
+  headerStyle: {},
+  extra: null,
+  returnBtn: null,
+  title: '',
 };
 
-export const InstantLayout = ({ children, title, style }: InstantLayoutProps) => {
+export const InstantLayout = ({
+  children,
+  title,
+  style,
+  extra,
+  headerStyle,
+  returnBtn,
+}: InstantLayoutProps) => {
+  const navigate = useNavigate();
   return (
     <section
       style={{
@@ -24,9 +41,30 @@ export const InstantLayout = ({ children, title, style }: InstantLayoutProps) =>
         ...style,
       }}
     >
-      <Typography.Title type="secondary" level={5} style={{ fontSize: '12px' }}>
-        {title}
-      </Typography.Title>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          ...headerStyle,
+        }}
+      >
+        <Typography.Title type="secondary" level={5} style={{ fontSize: '12px' }}>
+          <Space>
+            {title}
+
+            {returnBtn && (
+              <Button type="link" onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
+                <Space>
+                  <RollbackOutlined />
+                  <span>返回</span>
+                </Space>
+              </Button>
+            )}
+          </Space>
+        </Typography.Title>
+        {extra}
+      </div>
       {children}
     </section>
   );

@@ -19,7 +19,8 @@ type UseGetOrderInfoOptions = {
 export const useOrderInfo = ({ token, config }: UseGetOrderInfoOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: queryKeys['order-info'],
+    queryKey: [queryKeys['order-info'], '/GetTxDetail.aspx'],
     queryFn: () => getOrderInfo({ token }),
+    cacheTime: 0,
   });
 };
